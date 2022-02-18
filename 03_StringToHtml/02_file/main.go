@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	name := "Todd McLeod"
+	name := "Farkhan Hamzah Firdaus"
 	str := fmt.Sprint(`
 	<!DOCTYPE html>
 	<html lang="en">
