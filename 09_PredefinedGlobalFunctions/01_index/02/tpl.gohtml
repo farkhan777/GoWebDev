@@ -11,6 +11,11 @@
 {{index .Words 2}}
 {{.Lname}}
 
+    {{range .Words}}
+        {{.}}
+    {{end}}
+    {{.Lname}}
+
 <!--
 index
 a func you can use in a template
