@@ -12,7 +12,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	nf, err := os.Create("index.html")
+	nf, err := os.Create("index.gohtml")
 	if err != nil {
 		log.Fatalln(err)
 	}
