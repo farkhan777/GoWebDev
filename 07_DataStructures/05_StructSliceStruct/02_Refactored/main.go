@@ -20,7 +20,7 @@ type car struct {
 }
 
 func init() {
-	tpl = template.Must(template.ParseFiles("tpl.gohtml"))
+	tpl = template.Must(template.ParseFiles("tpl.footerstuff.gohtml"))
 }
 
 func main() {

@@ -10,7 +10,7 @@ import (
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.New("").Funcs(fm).ParseFiles("tpl.gohtml"))
+	tpl = template.Must(template.New("").Funcs(fm).ParseFiles("tpl.footerstuff.gohtml"))
 }
 
 func monthDayYear(t time.Time) string {
@@ -22,7 +22,7 @@ var fm = template.FuncMap{
 }
 
 func main() {
-	err := tpl.ExecuteTemplate(os.Stdout, "tpl.gohtml", time.Now())
+	err := tpl.ExecuteTemplate(os.Stdout, "tpl.footerstuff.gohtml", time.Now())
 	if err != nil {
 		log.Fatalln(err)
 	}

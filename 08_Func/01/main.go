@@ -31,7 +31,7 @@ var fm = template.FuncMap{
 }
 
 func init() {
-	tpl = template.Must(template.New("").Funcs(fm).ParseFiles("tpl.gohtml"))
+	tpl = template.Must(template.New("").Funcs(fm).ParseFiles("tpl.footerstuff.gohtml"))
 }
 
 func firstThree(s string) string {
@@ -81,7 +81,7 @@ func main() {
 		Transport: cars,
 	}
 
-	err := tpl.ExecuteTemplate(os.Stdout, "tpl.gohtml", data)
+	err := tpl.ExecuteTemplate(os.Stdout, "tpl.footerstuff.gohtml", data)
 	if err != nil {
 		log.Fatalln(err)
 	}

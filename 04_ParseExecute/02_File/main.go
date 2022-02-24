@@ -7,12 +7,12 @@ import (
 )
 
 func main() {
-	tpl, err := template.ParseFiles("tpl.gohtml")
+	tpl, err := template.ParseFiles("tpl.footerstuff.gohtml")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	nf, err := os.Create("index.gohtml")
+	nf, err := os.Create("index.footerstuff.gohtml")
 	if err != nil {
 		log.Fatalln(err)
 	}

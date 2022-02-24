@@ -17,17 +17,17 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = tpl.ExecuteTemplate(os.Stdout, "vespa.gohtml", nil)
+	err = tpl.ExecuteTemplate(os.Stdout, "vespa.footerstuff.gohtml", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	err = tpl.ExecuteTemplate(os.Stdout, "two.gohtml", nil)
+	err = tpl.ExecuteTemplate(os.Stdout, "two.footerstuff.gohtml", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	err = tpl.ExecuteTemplate(os.Stdout, "one.gohtml", nil)
+	err = tpl.ExecuteTemplate(os.Stdout, "one.footerstuff.gohtml", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
