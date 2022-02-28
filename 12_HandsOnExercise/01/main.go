@@ -27,7 +27,7 @@ type year struct {
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.ParseFiles("tpl.gohtml"))
+	tpl = template.Must(template.ParseFiles("hw.gohtml"))
 }
 
 func main() {
