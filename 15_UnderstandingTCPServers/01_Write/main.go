@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// can't use 8080 in my pc
 	li, err := net.Listen("tcp", ":7777")
 	if err != nil {
 		log.Fatalln(err)
