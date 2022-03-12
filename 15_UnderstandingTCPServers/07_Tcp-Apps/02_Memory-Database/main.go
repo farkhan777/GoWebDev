@@ -29,7 +29,7 @@ func main() {
 func handle(conn net.Conn) {
 	defer conn.Close()
 
-	//	 instruction
+	// instructions
 	io.WriteString(conn, "\r\nIN-MEMORY DATABASE\r\n\r\n"+
 		"USE:\r\n"+
 		"\tSET key value \r\n"+
@@ -45,7 +45,7 @@ func handle(conn net.Conn) {
 	for scanner.Scan() {
 		ln := scanner.Text()
 		fs := strings.Fields(ln)
-		//	 logic
+		// logic
 		if len(fs) < 1 {
 			continue
 		}
@@ -66,7 +66,7 @@ func handle(conn net.Conn) {
 			k := fs[1]
 			delete(data, k)
 		default:
-			fmt.Fprintln(conn, "INVALID COMMAND"+fs[0]+"\r\n")
+			fmt.Fprintln(conn, "INVALID COMMAND "+fs[0]+"\r\n")
 			continue
 		}
 	}
