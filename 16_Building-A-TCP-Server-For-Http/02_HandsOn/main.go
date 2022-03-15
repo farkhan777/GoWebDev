@@ -45,7 +45,6 @@ func request(conn net.Conn) {
 			u := strings.Fields(ln)[1] // uri
 
 			fmt.Println("***METHOD", m)
-			fmt.Println("Farkhan Hamzah Firdaus")
 			fmt.Println("**URI", u)
 		}
 		if ln == "" {
