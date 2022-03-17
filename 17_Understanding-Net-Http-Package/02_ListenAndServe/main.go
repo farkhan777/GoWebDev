@@ -9,6 +9,7 @@ type hotdog int
 
 func (m hotdog) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(w, "Any code you want in this func")
+	fmt.Fprintln(w, "Farkhan Hamzah Firdaus")
 }
 
 func main() {
