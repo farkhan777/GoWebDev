@@ -4,7 +4,6 @@ import "fmt"
 
 func main() {
 	name := "Farkhan Hamzah Firdaus"
-
 	tpl := `
 	<!DOCTYPE html>
 	<html lang="en">
