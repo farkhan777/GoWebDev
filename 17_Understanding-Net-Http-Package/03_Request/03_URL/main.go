@@ -1,10 +1,10 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 	"net/url"
-	"text/template"
 )
 
 type hotdog int
@@ -16,15 +16,14 @@ func (m hotdog) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 
 	data := struct {
-		Method     string
-		URL        *url.URL
-		Submission url.Values
+		Method      string
+		URL         *url.URL
+		Submissions url.Values
 	}{
 		req.Method,
 		req.URL,
 		req.Form,
 	}
-
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
 }
 
