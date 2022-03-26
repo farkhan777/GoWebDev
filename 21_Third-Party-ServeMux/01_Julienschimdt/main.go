@@ -14,7 +14,16 @@ func init() {
 }
 
 func main() {
-
+	mux := httprouter.New()
+	mux.GET("/", index)
+	mux.GET("/about", about)
+	mux.GET("/contact", contact)
+	mux.GET("/apply", apply)
+	mux.POST("/apply", applyProcess)
+	mux.GET("/user/:name", user)
+	mux.GET("/blog/:category/:article", blogRead)
+	mux.POST("/blog/:category/:article", blogWrite)
+	http.ListenAndServe(":7777", mux)
 }
 
 func user(res http.ResponseWriter, req *http.Request, ps httprouter.Params) {
