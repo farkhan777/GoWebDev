@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -68,5 +69,6 @@ func applyProcess(res http.ResponseWriter, req *http.Request, _ httprouter.Param
 func HandleError(res http.ResponseWriter, err error) {
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
+		log.Fatalln(err)
 	}
 }
