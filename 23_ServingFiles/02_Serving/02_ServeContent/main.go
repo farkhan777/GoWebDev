@@ -28,5 +28,11 @@ func dogPic(w http.ResponseWriter, req *http.Request) {
 	}
 	defer file.Close()
 
-	io.Copy(w, file)
+	fi, err := file.Stat()
+	if err != nil {
+		http.Error(w, "file not found", 404)
+		return
+	}
+
+	http.ServeContent(w, req, file.Name(), fi.ModTime(), file)
 }
