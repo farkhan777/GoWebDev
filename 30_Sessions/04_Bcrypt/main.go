@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 	"html/template"
@@ -25,6 +26,7 @@ func init() {
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/bar", bar)
+	http.HandleFunc("/signup", signup)
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.ListenAndServe(":7777", nil)
 
@@ -32,7 +34,7 @@ func main() {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	u := getUser(w, r)
-	tpl.ExecuteTemplate(w, "/", u)
+	tpl.ExecuteTemplate(w, "index.gohtml", u)
 }
 
 func bar(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +63,10 @@ func signup(w http.ResponseWriter, r *http.Request) {
 
 		// username taken?
 		if _, ok := dbUsers[un]; ok {
+			for k, e := range dbUsers {
+				fmt.Println("Key: ", k, "\nElement: ", e)
+			}
+
 			http.Error(w, "Username already taken", http.StatusForbidden)
 			return
 		}
@@ -89,5 +95,5 @@ func signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tpl.ExecuteTemplate(w, "index.gohtml", u)
+	tpl.ExecuteTemplate(w, "signup.gohtml", u)
 }
