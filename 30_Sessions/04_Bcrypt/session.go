@@ -23,3 +23,13 @@ func getUser(w http.ResponseWriter, r *http.Request) user {
 	}
 	return u
 }
+
+func alreadyLoggIn(r *http.Request) bool {
+	c, err := r.Cookie("session")
+	if err != nil {
+		return false
+	}
+	un := dbSessions[c.Value]
+	_, ok := dbUsers[un]
+	return ok
+}
