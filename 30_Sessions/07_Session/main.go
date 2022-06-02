@@ -41,7 +41,11 @@ func index(w http.ResponseWriter, r *http.Request) {
 func bar(w http.ResponseWriter, r *http.Request) {
 	u := getUser(w, r)
 	if !alreadyLoggedIn(r) {
-		http.Redirect(w, r, "/", http.StatusForbidden)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+	if u.Role != "007" {
+		http.Error(w, "You must be 007 to enter the bar", http.StatusForbidden)
 		return
 	}
 	tpl.ExecuteTemplate(w, "bar.gohtml", u)
@@ -58,8 +62,8 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		un := r.FormValue("username")
 		p := r.FormValue("password")
-		f := r.FormValue("first")
-		l := r.FormValue("last")
+		f := r.FormValue("firstname")
+		l := r.FormValue("lastname")
 		rl := r.FormValue("role")
 
 		if _, ok := dbUser[un]; ok {
@@ -81,10 +85,10 @@ func signup(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		u = user{Username: un, Password: bs, First: f, Last: l, Role: rl}
+		u = user{un, bs, f, l, rl}
 		dbUser[un] = u
 
-		http.Redirect(w, r, "/", http.StatusForbidden)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
 	tpl.ExecuteTemplate(w, "signup.gohtml", u)
@@ -95,6 +99,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
+
+	var u user
 
 	if r.Method == http.MethodPost {
 		un := r.FormValue("username")
@@ -122,14 +128,15 @@ func login(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
+	tpl.ExecuteTemplate(w, "login.gohtml", u)
 }
 
-func logout(w http.ResponseWriter, req *http.Request) {
-	if !alreadyLoggedIn(req) {
-		http.Redirect(w, req, "/", http.StatusSeeOther)
+func logout(w http.ResponseWriter, r *http.Request) {
+	if !alreadyLoggedIn(r) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
-	c, _ := req.Cookie("session")
+	c, _ := r.Cookie("session")
 	// delete the session
 	delete(dbSession, c.Value)
 	// remove the cookie
@@ -140,5 +147,5 @@ func logout(w http.ResponseWriter, req *http.Request) {
 	}
 	http.SetCookie(w, c)
 
-	http.Redirect(w, req, "/login", http.StatusSeeOther)
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
