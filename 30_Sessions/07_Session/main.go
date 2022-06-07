@@ -26,6 +26,7 @@ func init() {
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/bar", bar)
+	http.HandleFunc("/admin", admin)
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/logout", logout)
@@ -49,6 +50,20 @@ func bar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tpl.ExecuteTemplate(w, "bar.gohtml", u)
+}
+
+func admin(w http.ResponseWriter, r *http.Request) {
+	u := getUser(w, r)
+	if !alreadyLoggedIn(r) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	if u.Role != "admin" {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+	tpl.ExecuteTemplate(w, "admin.gohtml", u)
 }
 
 func signup(w http.ResponseWriter, r *http.Request) {

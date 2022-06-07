@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+</head>
+<body>
+
+<h1>Welcome to the admin page</h1>
+
+{{if .First}}
+    USER NAME {{.Username}}<br>
+    PASSWORD {{.Password}}<br>
+    FIRST {{.First}}<br>
+    LAST {{.Last}}<br>
+    <h2><a href="/logout">log out</a></h2>
+{{end}}
+
+</body>
+</html>
