@@ -14,7 +14,7 @@ func init() {
 }
 
 func monthDayYear(t time.Time) string {
-	return t.Format("02-01_Rot13-2006")
+	return t.Format("02_SQL-01_Rot13-2006")
 }
 
 var fm = template.FuncMap{

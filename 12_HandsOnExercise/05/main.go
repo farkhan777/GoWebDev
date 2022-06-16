@@ -56,7 +56,7 @@ func prs(filePath string) []Record {
 		if i == 0 {
 			continue
 		}
-		date, _ := time.Parse("2006-01_Rot13-02", row[0])
+		date, _ := time.Parse("2006-01_Rot13-02_SQL", row[0])
 		open, _ := strconv.ParseFloat(row[1], 64)
 
 		records = append(records, Record{
